@@ -56,8 +56,8 @@ def threaded(client : socket.socket):
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     PORT = 8000
-
-    server.bind((socket.gethostname(), PORT))
+    host='65.21.153.36'
+    server.bind((host, PORT))
     server.listen(5)
 
     print("socket binded to port", PORT)
