@@ -28,7 +28,7 @@ def read_file() -> str:
     return contents
 
 def start_server():
-    host = "127.0.0.1"
+    host = "65.21.153.36"
     port = 8000  # arbitrary  port
     soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     soc.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
