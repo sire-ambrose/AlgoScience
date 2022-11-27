@@ -55,7 +55,7 @@ def threaded(client : socket.socket):
         client.sendall(bytes(response_msg, 'utf-8'))
         
         # server closes connection
-        client.close()
+        server.close()       
 
 
 def main():
@@ -69,19 +69,17 @@ def main():
 
     print_lock = threading.Lock()
 
-    # a forever loop until client wants to exit
-    while True:
+    # establish connection with client
+    clientsocket, address = server.accept()
 
-        # establish connection with client
-        clientsocket, address = server.accept()
+    # lock acquired by client
+    print_lock.acquire()
+    print('Connected to :', address)
 
-        # lock acquired by client
-        print_lock.acquire()
-        print('Connected to :', address)
+    # Start a new thread
+    start_new_thread(threaded, (clientsocket,))
+    
 
-        # Start a new thread
-        start_new_thread(threaded, (clientsocket,))
-    server.close()
 
 
 if __name__ == '__main__':
