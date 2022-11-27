@@ -53,8 +53,9 @@ def threaded(client : socket.socket):
             
         # server sends response to client
         client.sendall(bytes(response_msg, 'utf-8'))
-
-    client.close()
+        
+        # server closes connection
+        client.close()
 
 
 def main():
