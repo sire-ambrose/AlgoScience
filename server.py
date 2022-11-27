@@ -30,23 +30,27 @@ def threaded(client : socket.socket):
     """
 
     while True:
+        try:
 
-        # server receives "String" from client and decode the content
-        # fron byte to string
-        msg = client.recv(1024)
-        decoded_msg = msg.decode('utf-8')
+            # server receives "String" from client and decode the content
+            # fron byte to string
+            msg = client.recv(1024)
+            decoded_msg = msg.decode('utf-8')
 
-        # The 200.txt file is read
-        file_200txt = read_file()
+            # The 200.txt file is read
+            file_200txt = read_file()
 
-        # The client input and the file content are compared
-        # and the appropaite response is to return
-        if decoded_msg in file_200txt:
-            response_msg = "STRING EXISTS"
+            # The client input and the file content are compared
+            # and the appropaite response is to return
+            if decoded_msg in file_200txt:
+                response_msg = "STRING EXISTS"
 
-        else:
-            response_msg = "STRING NOT FOUND"
-
+            else:
+                response_msg = "STRING NOT FOUND"
+                
+        except Exception as e:
+            response_msg= e
+            
         # server sends response to client
         client.sendall(bytes(response_msg, 'utf-8'))
 
